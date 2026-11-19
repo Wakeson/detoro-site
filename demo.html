@@ -185,9 +185,9 @@
     });
   }
   document.getElementById("replay").addEventListener("click",play);
-  var stage=document.getElementById("stage");
+  var firstPhone=thread.closest(".phone");
   if("IntersectionObserver" in window && !reduce){
-    new IntersectionObserver(function(e,o){if(e[0].isIntersecting&&!started){play();o.disconnect()}},{threshold:.35}).observe(stage);
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting&&!started){play();o.disconnect()}},{threshold:.25}).observe(firstPhone);
   } else { play(); }
 })();
 </script>
