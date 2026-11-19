@@ -25,7 +25,7 @@
 .ds-home .side{position:relative;display:flex;flex-direction:column;align-items:center}
 .ds-home .side-label{color:var(--muted);font-size:14px;font-weight:600;margin:0 0 14px;text-align:center}
 .ds-home .side-label b{color:#fff;font-weight:600}
-.ds-home .demo-stage .phone{min-height:0;height:752px}
+.ds-home .demo-stage .phone{min-height:0;height:752px;width:310px;max-width:none;transform-origin:top center}
 .ds-home .demo-stage .screen{height:740px;min-height:0}
 .ds-home .demo-stage .thread{overflow-y:auto;scrollbar-width:none;scroll-behavior:smooth;gap:7px;padding:10px 12px 14px}
 .ds-home .demo-stage .thread::-webkit-scrollbar{display:none}
@@ -72,8 +72,6 @@
 }
 @media (max-width:480px){
   .ds-home .demo-steps{grid-template-columns:1fr}
-  .ds-home .demo-stage .phone{width:280px;height:796px}
-  .ds-home .demo-stage .screen{height:784px}
 }
 @media (prefers-reduced-motion:reduce){
   .ds-home .seq{transition:none}
@@ -193,6 +191,17 @@
     });
   }
   document.getElementById("replay").addEventListener("click",play);
+  var phones=[].slice.call(document.querySelectorAll(".demo-stage .phone"));
+  function fit(){
+    var vh=(window.visualViewport?window.visualViewport.height:window.innerHeight);
+    var avail=document.getElementById("stage").clientWidth-28;
+    var s=Math.min(1,(vh-96)/752,avail/312);
+    phones.forEach(function(ph){
+      ph.style.transform=s<1?"scale("+s.toFixed(3)+")":"";
+      ph.style.marginBottom=s<1?(-752*(1-s)).toFixed(0)+"px":"";
+    });
+  }
+  fit(); window.addEventListener("resize",fit); if(window.visualViewport) window.visualViewport.addEventListener("resize",fit);
   var firstPhone=thread.closest(".phone");
   if("IntersectionObserver" in window && !reduce){
     new IntersectionObserver(function(e,o){if(e[0].isIntersecting&&!started){play();o.disconnect()}},{threshold:.25}).observe(firstPhone);
