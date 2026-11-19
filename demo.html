@@ -25,10 +25,13 @@
 .ds-home .side{position:relative;display:flex;flex-direction:column;align-items:center}
 .ds-home .side-label{color:var(--muted);font-size:14px;font-weight:600;margin:0 0 14px;text-align:center}
 .ds-home .side-label b{color:#fff;font-weight:600}
-.ds-home .demo-stage .phone{min-height:600px}
-.ds-home .demo-stage .screen{height:588px;min-height:0}
-.ds-home .demo-stage .thread{overflow:hidden;scroll-behavior:smooth}
-.ds-home .demo-stage .bubble{font-size:14.5px}
+.ds-home .demo-stage .phone{min-height:0;height:752px}
+.ds-home .demo-stage .screen{height:740px;min-height:0}
+.ds-home .demo-stage .thread{overflow-y:auto;scrollbar-width:none;scroll-behavior:smooth;gap:7px;padding:10px 12px 14px}
+.ds-home .demo-stage .thread::-webkit-scrollbar{display:none}
+.ds-home .demo-stage .thread-head{padding:4px 12px 8px}
+.ds-home .demo-stage .avatar{width:38px;height:38px;font-size:15px}
+.ds-home .demo-stage .bubble{font-size:14px;line-height:1.32;padding:8px 12px}
 .ds-home .seq{opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
 .ds-home .seq.on{opacity:1;transform:none}
 .ds-home .seq.gone{display:none}
@@ -92,7 +95,7 @@
   <div class="demo-stage" id="stage">
     <div class="side">
       <p class="side-label"><b>The homeowner's phone</b></p>
-      <div class="phone" role="img" aria-label="The homeowner calls and nobody answers. Within a minute they get a text from Northshore Remodeling asking what project they need, when they want to start and the job's zip code. They answer each one, and the business replies that it will call them back as soon as possible.">
+      <div class="phone" role="img" aria-label="The homeowner calls and nobody answers. Within a minute they get a text from Northshore Remodeling asking what project they need, when they want to start and where the job is. They answer each one, and the business replies that it will call them back as soon as possible.">
         <div class="screen">
           <div class="status"><span>2:14</span><span>5G</span></div>
           <div class="thread-head"><div class="avatar" aria-hidden="true">N</div><b>Northshore Remodeling</b></div>
@@ -105,7 +108,7 @@
             <div class="bubble in seq" data-t="6900">Thanks! Roughly when are you hoping to get started?</div>
             <div class="bubble out seq" data-t="8700">Sometime this spring.</div>
             <div class="bubble in seq" data-t="10000">Got it. And what's the address or zip code for the job?</div>
-            <div class="bubble out seq" data-t="11800">53092, in Mequon.</div>
+            <div class="bubble out seq" data-t="11800" id="loc-reply">53213, in Wauwatosa.</div>
             <div class="bubble in seq" data-t="13100">Perfect, thank you! We'll give you a call back ASAP.</div>
             <div class="stamp seq" data-t="13700">Delivered</div>
           </div>
@@ -115,7 +118,7 @@
 
     <div class="side">
       <p class="side-label"><b>Your phone</b>, back on the ground</p>
-      <div class="phone" role="img" aria-label="Your phone's lock screen shows an alert: lead ready, call them back. Below it, the homeowner's replies from the text conversation: a kitchen with new cabinets and counters, sometime this spring, zip code 53092, with a button to call them back.">
+      <div class="phone" role="img" aria-label="Your phone's lock screen shows an alert: lead ready, call them back. Below it, the homeowner's replies from the text conversation: a kitchen with new cabinets and counters, sometime this spring, and the job's zip code, with a button to call them back.">
         <div class="screen lock">
           <div class="status"><span>2:16</span><span>5G</span></div>
           <p class="lock-time">2:16</p>
@@ -128,7 +131,7 @@
           </div>
           <div class="job seq" data-t="15600" aria-hidden="true">
             <h4>Their replies, in the conversation</h4>
-            <dl><dt>Project</dt><dd>"We want to redo our kitchen, new cabinets and counters."</dd><dt>Start</dt><dd>"Sometime this spring."</dd><dt>Where</dt><dd>"53092, in Mequon."</dd></dl>
+            <dl><dt>Project</dt><dd>"We want to redo our kitchen, new cabinets and counters."</dd><dt>Start</dt><dd>"Sometime this spring."</dd><dt>Where</dt><dd id="loc-card">"53213, in Wauwatosa."</dd></dl>
             <div class="callbtn">Call back</div>
           </div>
         </div>
@@ -169,7 +172,8 @@
   var items=[].slice.call(document.querySelectorAll(".seq"));
   var thread=document.getElementById("thread"), waiting=document.getElementById("waiting");
   var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timers=[], started=false;
+  var timers=[], started=false, li=Math.floor(Math.random()*5);
+  var LOC=["53213, in Wauwatosa.","53005, in Brookfield.","53211, in Shorewood.","53051, in Menomonee Falls.","53217, in Whitefish Bay."];
   function clear(){timers.forEach(clearTimeout);timers=[];items.forEach(function(el){el.classList.remove("on","gone")});waiting.style.display="";thread.scrollTop=0}
   function show(el){
     el.classList.add("on");
@@ -178,6 +182,9 @@
   }
   function play(){
     clear(); started=true;
+    var l=LOC[li%LOC.length]; li++;
+    document.getElementById("loc-reply").textContent=l;
+    document.getElementById("loc-card").textContent="\u201c"+l+"\u201d";
     if(reduce){items.forEach(function(el){if(el.dataset.hide) el.classList.add("gone"); else show(el)}); return}
     items.forEach(function(el){
       timers.push(setTimeout(function(){show(el)},+el.dataset.t));
