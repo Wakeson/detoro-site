@@ -23,8 +23,11 @@
 .ds-home .demo-stage{border:1px solid var(--line);background:linear-gradient(#0b0d12,#07080b);border-radius:28px;width:min(100%,980px);margin:40px auto 0;padding:40px 24px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px;position:relative;overflow:hidden}
 .ds-home .demo-stage:before{content:"";pointer-events:none;background:radial-gradient(circle,#ff6a132e,#4cd3f50f 45%,#0000 70%);width:620px;height:620px;position:absolute;top:45%;left:30%;transform:translate(-50%,-50%)}
 .ds-home .side{position:relative;display:flex;flex-direction:column;align-items:center}
-.ds-home .side-label{color:var(--muted);font-size:14px;font-weight:600;margin:0 0 14px;text-align:center}
-.ds-home .side-label b{color:#fff;font-weight:600}
+.ds-home .side-label{color:var(--muted);font-size:16px;font-weight:600;margin:0 0 16px;text-align:center}
+.ds-home .side-label b{display:inline-block;font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-.01em;padding:8px 18px;border-radius:999px;margin-bottom:6px}
+.ds-home .side-label .who-them{color:#04141a;background:var(--cyan)}
+.ds-home .side-label .who-you{color:#1a0b02;background:var(--orange)}
+.ds-home .side-label small{display:block;font-size:14px;color:var(--muted);font-weight:500}
 .ds-home .demo-stage .phone{min-height:0;height:752px;width:310px;max-width:none;transform-origin:top center}
 .ds-home .demo-stage .screen{height:740px;min-height:0}
 .ds-home .demo-stage .thread{overflow-y:auto;scrollbar-width:none;scroll-behavior:smooth;gap:7px;padding:10px 12px 14px}
@@ -93,7 +96,7 @@
 
   <div class="demo-stage" id="stage">
     <div class="side">
-      <p class="side-label"><b>The homeowner's phone</b></p>
+      <p class="side-label"><b class="who-them">The homeowner's phone</b><small>They called you and you couldn't pick up</small></p>
       <div class="phone" role="img" aria-label="The homeowner calls and nobody answers. Within a minute they get a text from Northshore Remodeling asking what project they need, when they want to start and where the job is. They answer each one, and the business replies that it will call them back as soon as possible.">
         <div class="screen">
           <div class="status"><span>2:14</span><span>5G</span></div>
@@ -116,7 +119,7 @@
     </div>
 
     <div class="side">
-      <p class="side-label"><b>Your phone</b>, back on the ground</p>
+      <p class="side-label"><b class="who-you">Your phone</b><small>When you're back on the ground</small></p>
       <div class="phone" role="img" aria-label="Your phone's lock screen shows an alert: lead ready, call them back. Below it, the homeowner's replies from the text conversation: a kitchen with new cabinets and counters, sometime this spring, and the job's zip code, with a button to call them back.">
         <div class="screen lock">
           <div class="status"><span>2:16</span><span>5G</span></div>
