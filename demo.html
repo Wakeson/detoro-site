@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo | DeToro Systems missed-call text-back</title>
+<meta name="theme-color" content="#050608">
+<meta name="description" content="Watch what happens when a homeowner calls your business and you can't pick up: a text goes out within a minute, asks three quick questions, and sends you the job details.">
+<meta property="og:title" content="See it work: missed-call text-back by DeToro Systems">
+<meta property="og:description" content="A homeowner calls, you can't pick up. Here's the text conversation they get and the alert you get.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://go.trydetorosystems.com/demo">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="site.css?v=1">
+<style>
+.ds-home .demo-hero{padding:64px 0 24px;text-align:center}
+.ds-home .demo-hero h1{letter-spacing:-.04em;font-size:clamp(40px,6.5vw,76px);line-height:1;margin:0 auto 20px;max-width:16ch}
+.ds-home .demo-hero .lead{color:#c3c8d2;max-width:46ch;margin:0 auto;font-size:clamp(17px,1.8vw,20px)}
+.ds-home .demo-stage{border:1px solid var(--line);background:linear-gradient(#0b0d12,#07080b);border-radius:28px;width:min(100%,980px);margin:40px auto 0;padding:40px 24px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px;position:relative;overflow:hidden}
+.ds-home .demo-stage:before{content:"";pointer-events:none;background:radial-gradient(circle,#ff6a132e,#4cd3f50f 45%,#0000 70%);width:620px;height:620px;position:absolute;top:45%;left:30%;transform:translate(-50%,-50%)}
+.ds-home .side{position:relative;display:flex;flex-direction:column;align-items:center}
+.ds-home .side-label{color:var(--muted);font-size:14px;font-weight:600;margin:0 0 14px;text-align:center}
+.ds-home .side-label b{color:#fff;font-weight:600}
+.ds-home .demo-stage .phone{min-height:600px}
+.ds-home .demo-stage .screen{height:588px;min-height:0}
+.ds-home .demo-stage .thread{overflow:hidden;scroll-behavior:smooth}
+.ds-home .demo-stage .bubble{font-size:14.5px}
+.ds-home .seq{opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+.ds-home .seq.on{opacity:1;transform:none}
+.ds-home .seq.gone{display:none}
+.ds-home .lock{background:linear-gradient(160deg,#1b2433,#0d1118 60%,#20160f);color:#fff;font-family:-apple-system,blinkmacsystemfont,Segoe UI,roboto,sans-serif;align-items:stretch;padding:0 12px}
+.ds-home .lock .status{color:#fff}
+.ds-home .lock-time{text-align:center;font-size:64px;font-weight:300;letter-spacing:-.02em;margin:18px 0 0;line-height:1}
+.ds-home .lock-date{text-align:center;font-size:15px;color:#ffffffb3;margin:6px 0 26px}
+.ds-home .notif{background:#ffffffe6;color:#111;border-radius:18px;padding:12px 14px;font-size:13.5px;line-height:1.35;box-shadow:0 8px 24px #0006}
+.ds-home .notif-top{display:flex;align-items:center;gap:8px;color:#555;font-size:12px;margin-bottom:4px}
+.ds-home .notif-icon{width:20px;height:20px;border-radius:5px;background:var(--orange);display:grid;place-items:center}
+.ds-home .notif-icon svg{width:12px;height:12px}
+.ds-home .notif-top .when{margin-left:auto}
+.ds-home .notif b{display:block;font-size:14px;margin-bottom:2px}
+.ds-home .job{background:#ffffffeb;color:#111;border-radius:18px;padding:14px;margin-top:10px;font-size:13.5px}
+.ds-home .job h4{margin:0 0 8px;font-size:13px;color:#555;font-weight:600}
+.ds-home .job dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0}
+.ds-home .job dt{color:#777}
+.ds-home .job dd{margin:0;font-weight:600}
+.ds-home .job .callbtn{margin-top:12px;background:#34a853;color:#fff;border-radius:12px;padding:9px;text-align:center;font-weight:600}
+.ds-home .waiting{color:#ffffff80;text-align:center;font-size:13px;margin-top:8px}
+.ds-home .demo-controls{text-align:center;margin:22px 0 0}
+.ds-home .replay{font:inherit;cursor:pointer;border:1px solid var(--line2);color:#fff;background:#ffffff08;border-radius:999px;padding:10px 20px;font-size:15px;font-weight:600}
+.ds-home .replay:hover{border-color:#ffffff4d}
+.ds-home .replay:focus-visible,.ds-home .btn:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.ds-home .demo-caption{color:var(--dim);font-size:13px;text-align:center;margin:12px 0 0}
+.ds-home .demo-steps{list-style:none;padding:0;margin:64px auto 0;max-width:980px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.ds-home .demo-steps li{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:20px;counter-increment:s}
+.ds-home .demo-steps li:before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#ff6a1326;color:var(--orange);font-weight:700;font-size:14px;margin-bottom:12px}
+.ds-home .demo-steps h3{margin:0 0 6px;font-size:17px}
+.ds-home .demo-steps p{margin:0;color:var(--muted);font-size:15px;line-height:1.45}
+.ds-home .demo-cta{text-align:center;padding:64px 0 88px}
+.ds-home .demo-cta h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.03em;margin:0 0 12px}
+.ds-home .demo-cta p{color:var(--muted);margin:0 auto 26px;max-width:46ch}
+.ds-home .demo-cta .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@media (max-width:820px){
+  .ds-home .demo-stage{grid-template-columns:1fr;padding:28px 14px 0;gap:36px}
+  .ds-home .demo-steps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){
+  .ds-home .demo-steps{grid-template-columns:1fr}
+  .ds-home .demo-stage .phone{width:280px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ds-home .seq{transition:none}
+  .ds-home .demo-stage .thread{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="ds-home">
+<header class="nav"><div class="wrap">
+  <a aria-label="DeToro Systems home" class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><path d="M17 50V14h11a18 18 0 0 1 0 36h-3" fill="none" stroke="#FF6A13" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M27.5 41.5 18.5 50l9 8.5z" fill="#4CD3F5"></path><path d="M14.6 10.5c1.4-1 3.3-.8 4.4.5l4.2 5.3c1 1.2.9 3-.1 4.2l-2.6 2.9c1.9 4.2 5.2 7.7 9.4 9.7l2.9-2.5c1.2-1 3-1.1 4.2-.1l5.3 4.3c1.3 1.1 1.5 3 .5 4.4l-2.3 3.3c-1.4 2-4 2.9-6.4 2.1C21.2 41.6 12.4 32.8 9.4 20.9c-.6-2.4.3-5 2.3-6.4z" fill="#FF6A13" transform="translate(21.2 20.5) scale(.42)"></path></svg></span>DeToro Systems</a>
+  <nav class="nav-links" aria-label="Main"><a class="plain" href="/#how">How it works</a><a class="plain" href="/#pricing">Pricing</a><a class="btn btn-white" href="/#contact">Start free</a></nav>
+</div></header>
+
+<main>
+<section class="demo-hero"><div class="wrap">
+  <h1>Here's what your callers <span class="grad">get.</span></h1>
+  <p class="lead">A homeowner calls while you're on a job. Within a minute they get a text from your business, answer three quick questions, and you get the details to call them back.</p>
+
+  <div class="demo-stage" id="stage">
+    <div class="side">
+      <p class="side-label"><b>The homeowner's phone</b></p>
+      <div class="phone" role="img" aria-label="The homeowner calls and nobody answers. Within a minute they get a text from Northshore Remodeling asking what project they need, when they want to start and the job's zip code. They answer each one, and the business replies that it will call them back as soon as possible.">
+        <div class="screen">
+          <div class="status"><span>2:14</span><span>5G</span></div>
+          <div class="thread-head"><div class="avatar" aria-hidden="true">N</div><b>Northshore Remodeling</b></div>
+          <div class="thread" id="thread" aria-hidden="true">
+            <div class="call-card seq" data-t="400"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#C2412D" stroke-width="2.6" stroke-linecap="round"><path d="M17 7 7 17M7 7h10v10" transform="rotate(180 12 12)"></path></svg></span><span><strong>Missed call</strong>&nbsp;2:14 PM</span></div>
+            <div class="stamp seq" data-t="1300">Text Message, 2:14 PM</div>
+            <div class="typing seq" data-t="1900" data-hide="3200"><i></i><i></i><i></i></div>
+            <div class="bubble in seq" data-t="3200">Hi, this is Northshore Remodeling. Sorry we missed your call, we're probably out on a job. What project can we help you with? Reply STOP to opt out.</div>
+            <div class="bubble out seq" data-t="5400">Hi! We want to redo our kitchen, new cabinets and counters.</div>
+            <div class="bubble in seq" data-t="6900">Thanks! Roughly when are you hoping to get started?</div>
+            <div class="bubble out seq" data-t="8700">Sometime this spring.</div>
+            <div class="bubble in seq" data-t="10000">Got it. And what's the address or zip code for the job?</div>
+            <div class="bubble out seq" data-t="11800">53092, in Mequon.</div>
+            <div class="bubble in seq" data-t="13100">Perfect, thank you! We'll give you a call back ASAP.</div>
+            <div class="stamp seq" data-t="13700">Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <p class="side-label"><b>Your phone</b>, back on the ground</p>
+      <div class="phone" role="img" aria-label="Your phone's lock screen shows an alert: lead ready, call them back. Below it, the job details: a kitchen with new cabinets and counters, starting this spring, zip code 53092, with a button to call them back.">
+        <div class="screen lock">
+          <div class="status"><span>2:16</span><span>5G</span></div>
+          <p class="lock-time">2:16</p>
+          <p class="lock-date">Thursday, November 19</p>
+          <p class="waiting" id="waiting" aria-hidden="true">Waiting for the homeowner's answers…</p>
+          <div class="notif seq" data-t="14600" aria-hidden="true">
+            <div class="notif-top"><span class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg></span>LeadConnector<span class="when">now</span></div>
+            <b>Lead ready: call them back</b>
+            (414) 555-0148 answered all 3 questions (project, timing, address). Open the conversation and call them back.
+          </div>
+          <div class="job seq" data-t="15600" aria-hidden="true">
+            <h4>From the text conversation</h4>
+            <dl><dt>Project</dt><dd>Kitchen: new cabinets and counters</dd><dt>Start</dt><dd>This spring</dd><dt>Zip</dt><dd>53092, Mequon</dd></dl>
+            <div class="callbtn">Call back</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-controls"><button class="replay" type="button" id="replay">Play it again</button></div>
+  <p class="demo-caption">Example conversation. The business name and phone number are made up. The texts are the real ones the system sends.</p>
+
+  <ol class="demo-steps">
+    <li><h3>You miss a call</h3><p>Your phone rings like always. If you pick up, nothing changes.</p></li>
+    <li><h3>They get a text</h3><p>Within a minute, from your business name, on a local number.</p></li>
+    <li><h3>Three quick questions</h3><p>What's the project, when do they want to start, and where's the job.</p></li>
+    <li><h3>You get the details</h3><p>An alert on your phone with their answers, so you call back knowing the job.</p></li>
+  </ol>
+</div></section>
+
+<section class="demo-cta"><div class="wrap">
+  <h2>Want this on your number?</h2>
+  <p>Setup takes one 15-minute call. Your 30 free days start the day your texts go live.</p>
+  <div class="cta-row">
+    <a class="btn btn-white" href="/#contact">Start my free 30 days</a>
+    <a class="btn btn-ghost" href="https://api.leadconnectorhq.com/widget/bookings/detoro-intro-call" target="_blank" rel="noopener noreferrer">Book a 15-minute call</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><path d="M17 50V14h11a18 18 0 0 1 0 36h-3" fill="none" stroke="#FF6A13" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M27.5 41.5 18.5 50l9 8.5z" fill="#4CD3F5"></path><path d="M14.6 10.5c1.4-1 3.3-.8 4.4.5l4.2 5.3c1 1.2.9 3-.1 4.2l-2.6 2.9c1.9 4.2 5.2 7.7 9.4 9.7l2.9-2.5c1.2-1 3-1.1 4.2-.1l5.3 4.3c1.3 1.1 1.5 3 .5 4.4l-2.3 3.3c-1.4 2-4 2.9-6.4 2.1C21.2 41.6 12.4 32.8 9.4 20.9c-.6-2.4.3-5 2.3-6.4z" fill="#FF6A13" transform="translate(21.2 20.5) scale(.42)"></path></svg></span>DeToro Systems</a><p>Missed-call text-back for remodelers and home service contractors around Milwaukee.</p></div>
+  <div><h4>Contact</h4><address>DeToro Systems<br>8280 W Highlander Dr<br>Mequon, WI 53097<br><a href="tel:+12624044532">262-404-4532</a><br><a href="mailto:jake@trydetorosystems.com">jake@trydetorosystems.com</a></address></div>
+  <div><h4>Policies</h4><ul><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li></ul></div>
+  <div class="fine"><p>DeToro Systems is a sole proprietorship owned by Jacob DeToro. © 2026 DeToro Systems.</p></div>
+</div></footer>
+</div>
+
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll(".seq"));
+  var thread=document.getElementById("thread"), waiting=document.getElementById("waiting");
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var timers=[], started=false;
+  function clear(){timers.forEach(clearTimeout);timers=[];items.forEach(function(el){el.classList.remove("on","gone")});waiting.style.display="";thread.scrollTop=0}
+  function show(el){
+    el.classList.add("on");
+    if(el.classList.contains("notif")) waiting.style.display="none";
+    if(thread.contains(el)) thread.scrollTop=thread.scrollHeight;
+  }
+  function play(){
+    clear(); started=true;
+    if(reduce){items.forEach(function(el){if(el.dataset.hide) el.classList.add("gone"); else show(el)}); return}
+    items.forEach(function(el){
+      timers.push(setTimeout(function(){show(el)},+el.dataset.t));
+      if(el.dataset.hide) timers.push(setTimeout(function(){el.classList.add("gone")},+el.dataset.hide));
+    });
+  }
+  document.getElementById("replay").addEventListener("click",play);
+  var stage=document.getElementById("stage");
+  if("IntersectionObserver" in window && !reduce){
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting&&!started){play();o.disconnect()}},{threshold:.35}).observe(stage);
+  } else { play(); }
+})();
+</script>
+</body>
+</html>
