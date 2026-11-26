@@ -122,6 +122,8 @@ p{max-width:60ch}
 
 /* Who */
 .who p{font-size:20px;line-height:1.55;color:#dcdad4}
+.who .why{font-size:clamp(22px,2.3vw,28px);line-height:1.38;color:#fff;font-weight:500;text-wrap:pretty}
+.who .why + p{margin-top:24px}
 .who .rows{margin-top:28px}
 .who .rows > div:first-child{border-top:1px solid var(--rule)}
 
