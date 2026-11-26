@@ -59,18 +59,17 @@ p{max-width:60ch}
 
 /* Hero */
 .hero{padding:clamp(40px,6vw,80px) 0 clamp(56px,8vw,104px);overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 316px;column-gap:clamp(32px,6vw,88px);align-items:center}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 356px;column-gap:clamp(32px,6vw,88px);align-items:center}
 .hero h1{margin-bottom:clamp(24px,3vw,36px)}
 .hero h1 span{display:block;white-space:nowrap}
 .hero .lead{font-size:clamp(19px,1.7vw,22px);line-height:1.5;color:#dcdad4;max-width:36ch}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hero .terms{margin-top:22px;font-size:16px;line-height:1.55;color:var(--ash);max-width:48ch}
 
-.handset{position:relative;justify-self:end;width:100%}
-.handset::before{content:"";position:absolute;left:50%;top:46%;width:860px;height:860px;transform:translate(-50%,-50%);pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 860 860' fill='none' stroke='%23ff6a13'%3E%3Ccircle cx='430' cy='430' r='250' stroke-opacity='.34'/%3E%3Ccircle cx='430' cy='430' r='340' stroke-opacity='.2'/%3E%3Ccircle cx='430' cy='430' r='429' stroke-opacity='.1'/%3E%3C/svg%3E") center/contain no-repeat}
-.handset-body{position:relative;border-radius:50px;padding:11px;background:#14171d;box-shadow:0 0 0 1px #343944,0 40px 80px -30px #000}
-.handset video{width:100%;height:auto;aspect-ratio:590/1278;border-radius:40px;background:#131416}
-.handset figcaption{position:relative;margin-top:18px;font-size:15px;line-height:1.45;color:var(--ash);text-align:center}
+.proof{position:relative;justify-self:end;width:100%}
+.proof::before{content:"";position:absolute;left:50%;top:46%;width:900px;height:900px;transform:translate(-50%,-50%);pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 860 860' fill='none' stroke='%23ff6a13'%3E%3Ccircle cx='430' cy='430' r='250' stroke-opacity='.34'/%3E%3Ccircle cx='430' cy='430' r='340' stroke-opacity='.2'/%3E%3Ccircle cx='430' cy='430' r='429' stroke-opacity='.1'/%3E%3C/svg%3E") center/contain no-repeat}
+.proof video{position:relative;width:100%;height:auto;aspect-ratio:9/16;border-radius:26px;background:#0c0f14;box-shadow:0 0 0 1px #2c313b,0 40px 80px -30px #000}
+.proof figcaption{position:relative;margin-top:18px;font-size:15px;line-height:1.45;color:var(--ash);text-align:center}
 
 /* Bands: heading on the left, content on the right */
 .band{border-top:1px solid var(--rule);padding:clamp(64px,9vw,124px) 0}
@@ -158,14 +157,14 @@ footer .fine p + p{margin-top:8px}
 footer .fine a{text-decoration:underline}
 
 @media (min-width:901px){
-  h1{font-size:min(7.1vw,104px)}
+  h1{font-size:min(6.7vw,97px)}
 }
 @media (max-width:900px){
   body{font-size:17px}
   .top-nav a.plain{display:none}
   .hero .wrap{grid-template-columns:1fr;row-gap:48px}
-  .handset{justify-self:center;max-width:280px}
-  .handset::before{width:640px;height:640px}
+  .proof{justify-self:center;max-width:340px}
+  .proof::before{width:700px;height:700px}
   .band .wrap{grid-template-columns:1fr}
   .band-head{position:static}
   h2{max-width:16ch}
