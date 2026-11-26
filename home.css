@@ -117,6 +117,7 @@ p{max-width:60ch}
 .price span{padding-bottom:6px;font-size:19px;line-height:1.3;color:var(--ash)}
 .checks li{position:relative;padding:14px 0 14px 34px;border-top:1px solid var(--rule);color:#dcdad4}
 .checks li::before{content:"";position:absolute;left:4px;top:23px;width:14px;height:7px;border-left:2.5px solid var(--signal);border-bottom:2.5px solid var(--signal);transform:rotate(-45deg)}
+.checks strong{color:#fff;font-weight:650}
 .price-cta{margin-top:30px}
 
 /* Who */
